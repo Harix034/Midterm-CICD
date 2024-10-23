@@ -12,25 +12,25 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10, 3.12]  
+        python-version: [3.8, 3.9, 3.10, 3.12]  # No Python 3.1 here
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3   # Updated to v3 to avoid Node.js deprecation issues
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4  # Use the latest setup-python action version
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: Install Dependencies
       run: |
         pip install pytest
-        pip install -r requirements.txt  # If you have other dependencies
+        pip install -r requirements.txt  # If you have a requirements file
 
     - name: Debug Python Version
       run: |
         python --version
-        pip list  # Check Python version and installed packages
+        pip list
 
     - name: Set Python Path
       run: |
