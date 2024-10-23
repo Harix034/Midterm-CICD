@@ -25,8 +25,13 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install pytest
+        pip install -r requirements.txt  # Install any other dependencies
 
-    # New Step: Set PYTHONPATH so Python can find app.py
+    - name: Debug Python Version
+      run: |
+        python --version
+        pip list  # This will help you see what packages are installed
+
     - name: Set Python Path
       run: |
         echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
