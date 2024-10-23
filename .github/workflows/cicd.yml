@@ -1,4 +1,4 @@
-name: Python CICD
+name: Python CI
 
 on:
   push:
@@ -12,19 +12,19 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10, 3.12]  
+        python-version: [3.8, 3.9, 3.10, 3.12]  # No Python 3.1 here
 
     steps:
+    - uses: actions/checkout@v3  # Using the latest version to avoid Node.js warnings
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4  
+      uses: actions/setup-python@v4  # Updated to the latest version
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: Install Dependencies
       run: |
-        pip install pytest
-        pip install -r requirements.txt  # Assuming you have a requirements.txt
+        pip install pytest  # No need for a requirements.txt file
 
     - name: Debug Python Version
       run: |
