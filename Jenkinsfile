@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Harix034/midterm-ci-python.git'
+                git credentialsId: 'GitHub_PAT', url: 'git remote add origin https://github.com/Harix034/Midterm-CICD.git', branch: 'main'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo 'Building the project...'
             }
         }
 
@@ -19,11 +19,20 @@ pipeline {
                 echo 'Running tests...'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the project...'
+            }
+        }
     }
 
     post {
-        always {
-            echo 'Pipeline complete.'
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed!'
         }
     }
 }
